@@ -49,6 +49,8 @@ router.post(
   
       const safeUser = {
         id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
         email: user.email,
         username: user.username,
       };
@@ -75,9 +77,11 @@ router.post(
       const { user } = req;
       if (user) {
         const safeUser = {
-          id: user.id,
-          email: user.email,
-          username: user.username,
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        username: user.username,
         };
         return res.json({
           user: safeUser
@@ -87,41 +91,5 @@ router.post(
   );
 
  
-  // Log in
-// router.post(
-//   '/',
-//   validateLogin,
-//   async (req, res, next) => {
-//     const { credential, password } = req.body;
 
-//     const user = await User.unscoped().findOne({
-//       where: {
-//         [Op.or]: {
-//           username: credential,
-//           email: credential
-//         }
-//       }
-//     });
-
-//     if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
-//       const err = new Error('Login failed');
-//       err.status = 401;
-//       err.title = 'Login failed';
-//       err.errors = { credential: 'The provided credentials were invalid.' };
-//       return next(err);
-//     }
-
-//     const safeUser = {
-//       id: user.id,
-//       email: user.email,
-//       username: user.username,
-//     };
-
-//     await setTokenCookie(res, safeUser);
-
-//     return res.json({
-//       user: safeUser
-//     });
-//   }
-// );
 module.exports = router;
