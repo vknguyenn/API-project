@@ -49,8 +49,8 @@ router.post(
   
       const safeUser = {
         id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
       };
@@ -78,8 +78,8 @@ router.post(
       if (user) {
         const safeUser = {
         id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
         };
