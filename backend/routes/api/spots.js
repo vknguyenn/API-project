@@ -40,10 +40,28 @@ const authorUser = async (req, res, next) => {
 router.get('/current', requireAuth, async(req, res, next)=> {
     const { id } = req.user;
     
-    const spots = await Spot.findAll({
-        where: {ownerId: id}
+    let spot = await Spot.findByPk(id);
+
+    const numReviews = await Review.count({
+        where: {spotId: id}
     })
-    res.json({Spots: spots})
+
+    const sumReview = await Review.sum('stars', {
+        where: {spotId: id}
+    });
+
+
+    const avgRating = sumReview / numReviews;
+
+    const previewImage = await SpotImage.findOne({
+        attributes: ['url'],
+        where: {spotId: id}
+    })
+    spot = spot.toJSON();
+    spot.avgRating = avgRating;
+    spot.previewImage = previewImage;
+
+    res.json({Spots: [spot]})
 })
 
 router.get('/:spotId', requireAuth, async(req, res, next) => {
@@ -83,10 +101,38 @@ router.get('/:spotId', requireAuth, async(req, res, next) => {
     
     
 })
+
+
+
 router.get('/', async (req, res) => {
     const spots = await Spot.findAll();
+    const allSpots = [];
 
-    return res.json({spots})
+    for(let i = 0; i < spots.length; i++) {
+        let spot = spots[i];
+
+        const numReviews = await Review.count({
+            where: {spotId: spot.id}
+        })
+
+        const sumReview = await Review.sum('stars', {
+            where: {spotId: spot.id}
+        });
+
+
+        const avgRating = sumReview / numReviews;
+
+        const previewImage = await SpotImage.findOne({
+            attributes: ['url'],
+            where: {spotId: spot.id}
+        })
+        spot = spot.toJSON();
+        spot.avgRating = avgRating;
+        spot.previewImage = previewImage;
+        allSpots.push(spot);
+    }
+
+    return res.json({Spots: allSpots})
 }
 )
 
