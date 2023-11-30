@@ -36,6 +36,12 @@ module.exports = {
         userId: 3,
         review: 'This place stinks',
         stars: 1
+      },
+      {
+        spotId: 2,
+        userId: 3,
+        review: 'This place is fine',
+        stars: 4
       }
     ], {validate: true})
 
