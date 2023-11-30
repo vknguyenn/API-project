@@ -70,4 +70,13 @@ const requireAuth = function (req, _res, next) {
     return next(err);
   }
 
+  // const validSpot = async (req, res, next) => {
+  //   const { spotId } = req.params;
+  //   if(!await Spot.findByPk(spotId)) {
+  //       const error = new Error();
+  //       error.message = "Spot couldn't be found";
+  //       return res.status(404).json(error)
+  //   }
+  //   next();
+// }
   module.exports = { setTokenCookie, restoreUser, requireAuth };
