@@ -4,7 +4,7 @@ const express = require('express');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Spot, Review, SpotImage, ReviewImage, Booking } = require('../../db/models');
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, validationQuery } = require('../../utils/validation');
 const router = express.Router();
 
 
@@ -112,10 +112,87 @@ router.get('/:spotId', requireAuth, async(req, res, next) => {
     
 })
 
-
+const validateSpot = [
+    check('address')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Street address is required'),
+    check('city')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('City is required'),
+    check('state')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('State is required'),
+    check('country')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Country is required'),
+    check('lat')
+      .isFloat({min: -90, max: 90})
+      .withMessage('Latitude is not valid'),
+    check('lng')
+      .isFloat({min: -180, max: 180})
+      .withMessage('Longitude is not valid'),
+    check('name')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .isLength({max: 49})
+      .withMessage('Name must be less than 50 characters'),
+    check('description')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Description is required'),
+    check('price')
+      .isFloat({min: 1})
+      .withMessage('Price per day is required'),
+    handleValidationErrors
+  ];
 
 router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll();
+let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    const errors = validationQuery(req.query)
+
+    if(Object.keys(errors).length) {
+        res.status(400);
+        const err = new Error();
+        err.message = "Bad Request"
+        err.errors = errors
+
+        return res.json(err)
+    }
+
+    if (Number.isNaN(page) || page <= 0 || !page) page = 1;
+    if (Number.isNaN(size) || size <= 0 || !size) size = 20;
+    
+    if(page > 10) page = 10;
+    if(size > 20) size = 20;
+
+    const obj = {};
+
+    if(minLat && !maxLat) obj.lat = {[Op.gte]: minLat}
+    if(maxLat && !minLat) obj.lat = {[Op.lte]: maxLat}
+    if(minLat && maxLat) obj.lat = {[Op.between]: [minLat, maxLat]}
+
+    if(minLng && !maxLng) obj.lng = {[Op.gte]: minLng}
+    if(maxLng && !minLng) obj.lng = {[Op.lte]: maxLng}
+    if(minLng && maxLng) obj.lng = {[Op.between]: [minLng, maxLng]}
+
+    if(minPrice && !maxPrice) obj.minPrice = minPrice
+    if(maxPrice && !minPrice) obj.maxPrice = maxPrice
+    if(minPrice && maxPrice) obj.price = {[Op.between]: [minPrice, maxPrice]}
+    
+
+    
+
+    const spots = await Spot.findAll({
+        obj,
+        limit: size,
+        offset: size * (page - 1)
+    });
+
     const allSpots = [];
 
     for(let i = 0; i < spots.length; i++) {
@@ -141,41 +218,12 @@ router.get('/', async (req, res, next) => {
         allSpots.push(spot);
     }
 
-    return res.json({Spots: allSpots})
+    return res.json({Spots: allSpots, page, size})
 }
 )
 
 
-const validateSpot = [
-    check('address')
-      .exists({ checkFalsy: true })
-      .withMessage('Street address is required'),
-    check('city')
-      .exists({ checkFalsy: true })
-      .withMessage('City is required'),
-    check('state')
-      .exists({ checkFalsy: true })
-      .withMessage('State is required'),
-    check('country')
-      .exists({ checkFalsy: true })
-      .withMessage('Country is required'),
-      check('lat')
-      .exists({ checkFalsy: true })
-      .withMessage('Latitude is not valid'),
-      check('lng')
-      .exists({ checkFalsy: true })
-      .withMessage('Longitude is not valid'),
-      check('name')
-      .exists({ checkFalsy: true })
-      .withMessage('Name must be less than 50 characters'),
-      check('description')
-      .exists({ checkFalsy: true })
-      .withMessage('Description is required'),
-      check('price')
-      .exists({ checkFalsy: true })
-      .withMessage('Price per day is required'),
-    handleValidationErrors
-  ];
+
 
 router.post('/', authenUser, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;

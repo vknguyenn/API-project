@@ -26,8 +26,8 @@ module.exports = {
       city: 'Waffle Grove',
       state: 'Florida',
       country: 'USA',
-      lat: 12343.333,
-      lng: -12343.44,
+      lat: 23.333,
+      lng: -123.44,
       name: 'Big Bird',
       description: 'Very nice',
       price: 249.99
@@ -38,8 +38,8 @@ module.exports = {
       city: 'Sydney',
       state: 'Kangrooland',
       country: 'AUS',
-      lat: 16743.323,
-      lng: -16343.94,
+      lat: 43.323,
+      lng: -163.94,
       name: 'Jacky Roo',
       description: 'Very cool',
       price: 300.00
@@ -50,11 +50,23 @@ module.exports = {
       city: 'Bean Town',
       state: 'Chicago',
       country: 'USA',
-      lat: 10343.633,
-      lng: -18343.47,
+      lat: 89.633,
+      lng: -173.47,
       name: 'Mr. Bean',
       description: 'Very chill',
       price: 249.99
+    },
+    {
+      ownerId: 4,
+      address: '654 Nutcracker St',
+      city: 'Snowy City',
+      state: 'Cheesy State',
+      country: 'USA',
+      lat: 10.633,
+      lng: -133.47,
+      name: 'Mr. Snoopy',
+      description: 'Cool Beans',
+      price: 244.99
     }
    ], {validate: true})
   },
@@ -70,7 +82,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]: [1, 2, 3] }
+      ownerId: { [Op.in]: [1, 2, 3, 4] }
     }, {});
 
   }
