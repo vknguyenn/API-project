@@ -10,32 +10,38 @@ const router = express.Router();
 
 
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
-    const { imageId } = req.params;
-    const user = req.user;
-
-    const spotImage = await SpotImage.findByPk(imageId);
+    const { imageId } = req.params
+    const userId = req.user.id
+    const spotImage = await SpotImage.findByPk(imageId)
 
     if (!spotImage) {
-        const err = new Error();
-        err.message = "Spot Image couldn't be found";
-        res.status(404);
-        return res.json(err);
+        return res.status(404).json({
+            message: "Spot Image couldn't be found",
+            statusCode: 404
+        })
+    }
+   
+
+    const spot = await Spot.findByPk(spotImage.spotId)
+    const ownerId = spot.ownerId
+
+
+
+    if (ownerId !== userId) {
+        const err = new Error("Forbidden")
+        err.title = 'Forbidden';
+        err.status = 403;
+        return next(err);
     }
 
-    const spot = await Spot.findByPk(spotImage.spotId);
-    if (spot.ownerId !== user.id) {
-        const err = new Error();
-        err.title = "Authorization required";
-        err.message = "Forbidden";
-        res.status(403);
-        return res.json(err);
+    else {
+        await spotImage.destroy()
+        return res.status(200).json({
+            message: "Successfully deleted",
+            statusCode: 200
+        })
     }
 
-    await spotImage.destroy();
-
-    res.json({
-        message: "Successfully deleted"
-    });
 })
     
         module.exports = router;

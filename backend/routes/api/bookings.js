@@ -142,6 +142,61 @@ const pastEndDate = async (req, res, next)=> {
     }
 
 };
+
+const checkConflict = async(req, res, next) => {
+    let { spotId, bookingId } = req.params;
+    const { startDate, endDate } = req.body;
+    startTime = new Date(startDate).getTime();
+    endTime = new Date(endDate).getTime();
+  
+    if (!spotId) {
+      const booking = await Booking.findByPk(bookingId);
+      spotId = booking.spotId;
+    }
+  
+    const spot = await Spot.findByPk(spotId, {
+      include: {
+        model: Booking,
+        attributes: ["id", "startDate", "endDate"]
+      }
+    });
+  
+    let conflict = false;
+  
+    for (let booking of spot.Bookings) {
+      const start = new Date(booking.startDate);
+      const end = new Date(booking.endDate);
+      const errors = {};
+  
+      if (parseInt(bookingId) !== booking.id) {
+        if (startTime >= start && startTime <= end) {
+          errors.startDate = "Start date conflicts with an existing booking";
+          conflict = true;
+        }
+  
+        if (endTime >= start && endTime <= end) {
+          errors.endDate = "End date conflicts with an existing booking";
+          conflict = true;
+        }
+  
+        if (startTime < start && endTime > end) {
+          errors.message = "Existing booking within date range specified";
+          conflict = true;
+        }
+  
+        if (conflict) {
+          const err = new Error("Sorry, this spot is already booked for the specified dates");
+          errors.bookingId = bookingId;
+          err.errors = errors;
+          err.status = 403;
+          return next(err);
+        }
+      }
+    }
+  
+    next();
+
+};
   const validateBooking = [
     check('startDate')
       .exists({ checkFalsy: true })
@@ -152,7 +207,7 @@ const pastEndDate = async (req, res, next)=> {
     handleValidationErrors
   ]
 
-router.put('/:bookingId', authenUser, validBooking, bookingOwner, validateDates, validateBooking, pastEndDate, async(req, res, next)=> {
+router.put('/:bookingId', authenUser, validBooking, bookingOwner, validateDates, checkConflict, validateBooking, pastEndDate, async(req, res, next)=> {
     const { bookingId } = req.params;
     const booking = await Booking.findByPk(bookingId);
     if (req.body.startDate) {
