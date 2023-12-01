@@ -51,28 +51,37 @@ const authorUser = async (req, res, next) => {
 
 router.get('/current', requireAuth, async(req, res, next)=> {
     const { id } = req.user;
-    
-    let spot = await Spot.findByPk(id);
+    const spotArr = [];
 
-    const numReviews = await Review.count({
-        where: {spotId: id}
-    })
-
-    const sumReview = await Review.sum('stars', {
-        where: {spotId: id}
+    const spots = await Spot.findAll({
+        where: {ownerId: id}
     });
 
+    for(let i = 0; i < spots.length; i++) {
+        let spot = spots[i];
 
-    const avgRating = sumReview / numReviews;
+        const numReviews = await Review.count({
+            where: {spotId: id}
+        })
+        
+        const sumReview = await Review.sum('stars', {
+            where: {spotId: id}
+        });
+        
+        
+        const avgRating = sumReview / numReviews;
+        
+        const previewImage = await SpotImage.findOne({        
+            where: {spotId: id}
+        })
+        spot = spot.toJSON();
+        if (avgRating) spot.avgRating = avgRating;
+        if(previewImage) spot.previewImage = previewImage.url;
+        
+        spotArr.push(spot)
 
-    const previewImage = await SpotImage.findOne({        
-        where: {spotId: id}
-    })
-    spot = spot.toJSON();
-    if (avgRating) spot.avgRating = avgRating;
-    if(previewImage) spot.previewImage = previewImage.url;
-
-    res.json({Spots: [spot]})
+    }
+    res.json({Spots: spotArr})
 })
 
 router.get('/:spotId', requireAuth, async(req, res, next) => {
