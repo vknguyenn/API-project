@@ -64,13 +64,12 @@ router.get('/current', requireAuth, async(req, res, next)=> {
 
     const avgRating = sumReview / numReviews;
 
-    const previewImage = await SpotImage.findOne({
-        attributes: ['url'],
+    const previewImage = await SpotImage.findOne({        
         where: {spotId: id}
     })
     spot = spot.toJSON();
-    spot.avgRating = avgRating;
-    spot.previewImage = previewImage;
+    if (avgRating) spot.avgRating = avgRating;
+    if(previewImage) spot.previewImage = previewImage.url;
 
     res.json({Spots: [spot]})
 })
@@ -134,7 +133,6 @@ router.get('/', async (req, res, next) => {
         const avgRating = sumReview / numReviews;
 
         const previewImage = await SpotImage.findOne({
-            // attributes: ['url'],
             where: {spotId: spot.id}
         })
         spot = spot.toJSON();
