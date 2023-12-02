@@ -68,7 +68,11 @@ router.get('/current', requireAuth, async(req, res, next)=> {
         where: {spotId: id}
     })
     spot = spot.toJSON();
-    if (avgRating) spot.avgRating = avgRating;
+    if (avgRating) {
+        spot.avgRating = avgRating;
+    } else {
+        spot.avgRating = "This spot has no reviews yet"
+    }
     if(previewImage) spot.previewImage = previewImage.url;
 
     res.json({Spots: [spot]})
@@ -250,7 +254,7 @@ router.post('/:spotId/images', authenUser, authorUser, async(req, res) =>  {
     const { url, preview } = req.body;
     const spotImage = await SpotImage.create({spotId, url, preview});
 
-    newImage.spotId = spotId;
+    newImage.id = spotImage.id;
     newImage.url = url;
     newImage.preview = preview;
     res.json(newImage);
@@ -370,7 +374,8 @@ router.post('/:spotId/reviews', authenUser, validSpot, validateReview, async (re
     })
 
     for(let review of reviews) {
-        if (review.User.id == userId) {
+        // console.log(review.toJSON())
+        if (review.userId == userId) {
             return res.status(500).json({
                 "message": "User already has a review for this spot"
             })
