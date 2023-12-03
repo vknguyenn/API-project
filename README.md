@@ -1,5 +1,5 @@
 <!--!!START SILENT -->
-# AirBnB Clone
+# Homey Homes
 <!--!!END -->
 <!--!!ADD -->
 <!-- # `<name of application here>` -->

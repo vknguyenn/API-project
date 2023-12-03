@@ -7,14 +7,6 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
-    const images = await ReviewImage.findAll({
-        include: {
-            model: Review
-        }
-    });
-    res.json(images);
-});
 
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const { imageId } = req.params;

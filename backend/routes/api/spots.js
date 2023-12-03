@@ -5,6 +5,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Spot, Review, SpotImage, ReviewImage, Booking } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors, validationQuery } = require('../../utils/validation');
+const { Op } = require('sequelize');
 const router = express.Router();
 
 
@@ -50,8 +51,14 @@ const authorUser = async (req, res, next) => {
 
 router.get('/current', requireAuth, async(req, res, next)=> {
     const { id } = req.user;
-    
-    let spot = await Spot.findByPk(id);
+    const spotArr = [];
+
+    const spots = await Spot.findAll({
+        where: {ownerId: id}
+    });
+
+    for(let i = 0; i < spots.length; i++) {
+        let spot = spots[i];
 
     const numReviews = await Review.count({
         where: {spotId: id}
@@ -167,6 +174,8 @@ let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.que
 
         return res.json(err)
     }
+    page = parseInt(page);
+    size = parseInt(size);
 
     if (Number.isNaN(page) || page <= 0 || !page) page = 1;
     if (Number.isNaN(size) || size <= 0 || !size) size = 20;
@@ -255,6 +264,7 @@ router.post('/:spotId/images', authenUser, authorUser, async(req, res) =>  {
     const spotImage = await SpotImage.create({spotId, url, preview});
 
     newImage.id = spotImage.id;
+    newImage.id = spotImage.id;
     newImage.url = url;
     newImage.preview = preview;
     res.json(newImage);
@@ -291,7 +301,7 @@ router.delete('/:spotId', authenUser, authorUser, async(req, res, next) => {
 })
 
 
-router.get('/:spotId/reviews', authorUser, async (req, res) => {
+router.get('/:spotId/reviews', validSpot, async (req, res) => {
     const { spotId } = req.params;
     const reviews = await Spot.findByPk(spotId, {
         attributes: [],
@@ -362,26 +372,35 @@ router.post('/:spotId/reviews', authenUser, validSpot, validateReview, async (re
     const { spotId }= req.params;
     const userId = req.user.id;
 
-    const reviewPost = await Review.create({
-        spotId: parseInt(spotId),
-        userId,
-        review,
-        stars
-    })
-
-    const reviews = await Review.findAll({
-        where: {spotId}
-    })
-
-    for(let review of reviews) {
-        // console.log(review.toJSON())
-        if (review.userId == userId) {
-            return res.status(500).json({
-                "message": "User already has a review for this spot"
-            })
+    const spot = await Spot.findByPk(spotId)
+    const reviews = await spot.getReviews({
+        attributes: [],
+        include:{
+            model: User,
+            attributes: ['id']
         }
-    }
-    res.status(201).json(reviewPost)
+    })
+    
+    // const reviews = await Review.findAll({
+        //     where: {spotId}
+        // })
+        
+        for(let review of reviews) {
+            if (review.User.id == userId) {
+                return res.status(500).json({
+                    "message": "User already has a review for this spot"
+                })
+            }
+        }
+
+        const reviewPost = await Review.create({
+            spotId: parseInt(spotId),
+            userId,
+            review,
+            stars
+        })
+
+        return res.status(201).json(reviewPost)
 })
 
 
