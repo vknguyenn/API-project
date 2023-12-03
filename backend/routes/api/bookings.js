@@ -186,8 +186,9 @@ const checkConflict = async(req, res, next) => {
   
         if (conflict) {
           const err = new Error("Sorry, this spot is already booked for the specified dates");
-          errors.bookingId = bookingId;
+          
           err.errors = errors;
+          err.title = "Forbidden"
           err.status = 403;
           return next(err);
         }
