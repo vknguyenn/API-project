@@ -72,7 +72,7 @@ router.get('/current', requireAuth, async(req, res, next)=> {
     const avgRating = sumReview / numReviews;
 
     const previewImage = await SpotImage.findOne({        
-        where: {spotId: id}
+        where: {spotId: id, preview: true}
     })
     spot = spot.toJSON();
     if (avgRating) {
@@ -80,9 +80,15 @@ router.get('/current', requireAuth, async(req, res, next)=> {
     } else {
         spot.avgRating = "This spot has no reviews yet"
     }
-    if(previewImage) spot.previewImage = previewImage.url;
+    if(previewImage) {
+        spot.previewImage = previewImage.url
+    }else {
+        spot.previewImage = "This spot has no preview image yet"
+    }
+    spotArr.push(spot)
 
-    res.json({Spots: [spot]})
+    }
+    res.json({Spots: spotArr})
 })
 
 router.get('/:spotId', requireAuth, async(req, res, next) => {
@@ -223,11 +229,19 @@ let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.que
         const avgRating = sumReview / numReviews;
 
         const previewImage = await SpotImage.findOne({
-            where: {spotId: spot.id}
+            where: {spotId: spot.id, preview: true}
         })
         spot = spot.toJSON();
-        if (avgRating) spot.avgRating = avgRating;
-        if(previewImage) spot.previewImage = previewImage.url;
+        if (avgRating) {
+            spot.avgRating = avgRating;
+        } else {
+            spot.avgRating = "This spot has no reviews yet"
+        }
+        if(previewImage) {
+            spot.previewImage = previewImage.url
+        }else {
+            spot.previewImage = "This spot has no preview image yet"
+        }
         allSpots.push(spot);
     }
 
