@@ -67,6 +67,78 @@ module.exports = {
       name: 'Mr. Snoopy',
       description: 'Cool Beans',
       price: 244.99
+    },
+    {
+      ownerId: 5,
+      address: '666 Hollow Drive',
+      city: 'Spooky City',
+      state: 'Florida',
+      country: 'USA',
+      lat: 10.6312343,
+      lng: -23.4732,
+      name: 'Halloween Town',
+      description: 'Spooky',
+      price: 666.66
+    },
+    {
+      ownerId: 6,
+      address: '456 Happy Street',
+      city: 'Los Angeles',
+      state: 'California',
+      country: 'USA',
+      lat: 103.6312343,
+      lng: -13.4732,
+      name: 'Sunny Home',
+      description: 'Sunny',
+      price: 1000
+    },
+    {
+      ownerId: 7,
+      address: '647 Doodoo lane',
+      city: 'Sacramento',
+      state: 'California',
+      country: 'USA',
+      lat: 103.12343,
+      lng: -53.45732,
+      name: 'Cheap Home',
+      description: 'Stinks',
+      price: 10
+    },
+    {
+      ownerId: 8,
+      address: '9690 Gumball Road',
+      city: 'Candy Land',
+      state: 'Michigan',
+      country: 'USA',
+      lat: 17.633,
+      lng: -13.42,
+      name: 'Willy Wonka',
+      description: 'Yummy',
+      price: 777
+    },
+    {
+      ownerId: 9,
+      address: '486 FunLand Drive',
+      city: 'Tampa',
+      state: 'Florida',
+      country: 'USA',
+      lat: 10.6343,
+      lng: -103.732,
+      name: 'DisneyLand',
+      description: 'Fun',
+      price: 9999
+    },
+    {
+      ownerId: 10,
+      address: '4856 Last Drive',
+      city: 'Houston',
+      state: 'Texas',
+      country: 'USA',
+      lat: 100.6343,
+      lng: -109.7532,
+      name: 'Texas Roadhouse',
+      description: 'Yeehaw',
+      price: 12
     }
    ], {validate: true})
   },
@@ -82,7 +154,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]: [1, 2, 3, 4] }
+      ownerId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
     }, {});
 
   }
