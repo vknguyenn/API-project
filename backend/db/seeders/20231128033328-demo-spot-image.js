@@ -22,44 +22,44 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId: 1,
-        url: 'image url',
+        url: 'img1.png',
         preview: true
       },
       {
         spotId: 2,
-        url: 'image url',
+        url: 'img2.jpg',
         preview: true
       },{
         spotId: 3,
-        url: 'image url',
+        url: 'img3.jpg',
         preview: true
       },{
         spotId: 4,
-        url: 'image url',
+        url: 'img4.jpg',
         preview: true
       },{
         spotId: 5,
-        url: 'image url',
+        url: 'img5.jpg',
         preview: true
       },{
         spotId: 6,
-        url: 'image url',
+        url: 'img6.jpg',
         preview: true
       },{
         spotId: 7,
-        url: 'image url',
+        url: 'img7.jpg',
         preview: true
       },{
         spotId: 8,
-        url: 'image url',
+        url: 'img8.jpg',
         preview: true
       },{
         spotId: 9,
-        url: 'image url',
+        url: 'img9.jpg',
         preview: true
       },{
         spotId: 10,
-        url: 'image url',
+        url: 'img10.jpg',
         preview: true
       }
     ], {validate: true})
