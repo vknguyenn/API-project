@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
+import AllSpots from './components/Spots/Spots';
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <AllSpots />
       }
     ]
   }

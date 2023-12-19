@@ -1,3 +1,23 @@
 .hidden {
     display: none;
 }
+
+#navContainer {
+    display: flex;
+    justify-content: space-between
+}
+
+li {
+    list-style-type: none;
+}
+
+#profile {
+    border: 1px solid black;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+#profileIcon {
+    padding-left: 5px;
+}
+

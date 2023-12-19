@@ -1,0 +1,32 @@
+#spotsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+
+}
+
+.spotCard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 10px; */
+}
+
+.picture {
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.rating {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+/* 
+#root {
+    display: flex;
+    flex-direction: column;
+} */
