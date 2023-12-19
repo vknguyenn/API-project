@@ -22,7 +22,7 @@ const AllSpots = () => {
             {spots.map(spot => (
             <div className='spotCard' key={spot.id}>
                 <div className='spots' key={spot.id}>
-                    <img className="picture" src={`./Spot-images/${spot.previewImage}`} />
+                    <img className="picture" src={spot.previewImage} />
                      <div className="location">
                         <span>{spot.city}, {spot.state}</span>
                      </div>
