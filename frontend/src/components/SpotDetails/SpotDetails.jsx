@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
+import SpotReviews from "../Reviews/Reviews";
 import './SpotDetails.css'
 
 
@@ -56,9 +57,9 @@ const SpotDetails = () => {
                 <button className="reserve" onClick={() => {
                     throw alert('Feature coming soon')
                 }}>Reserve</button>
-
                 </div>
                 </div>
+                <SpotReviews />
         </div>
     )
 
