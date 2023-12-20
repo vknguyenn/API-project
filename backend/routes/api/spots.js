@@ -91,7 +91,7 @@ router.get('/current', requireAuth, async(req, res, next)=> {
     res.json({Spots: spotArr})
 })
 
-router.get('/:spotId', requireAuth, async(req, res, next) => {
+router.get('/:spotId', async(req, res, next) => {
     const { spotId } = req.params;
     let spot = await Spot.findByPk(spotId);
     if (spot) {
