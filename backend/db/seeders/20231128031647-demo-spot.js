@@ -28,8 +28,8 @@ module.exports = {
       country: 'USA',
       lat: 23.333,
       lng: -123.44,
-      name: 'Big Bird',
-      description: 'Very nice',
+      name: 'Super Nice House',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem donec massa sapien faucibus et molestie ac feugiat sed. Est lorem ipsum dolor sit. Risus quis varius quam quisque id diam vel. Auctor elit sed vulputate mi sit amet mauris. Eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque. Amet est placerat in egestas erat imperdiet sed. Leo a diam sollicitudin tempor id.',
       price: 249.99
     },
     {
@@ -40,8 +40,8 @@ module.exports = {
       country: 'USA',
       lat: 43.323,
       lng: -163.94,
-      name: 'Jacky Roo',
-      description: 'Very cool',
+      name: 'Cute and Cozy Nook',
+      description: 'Eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus. Tempus iaculis urna id volutpat lacus laoreet non. Morbi leo urna molestie at elementum eu facilisis. Ut sem viverra aliquet eget sit. Senectus et netus et malesuada fames ac turpis egestas. Arcu non sodales neque sodales ut etiam. Ipsum consequat nisl vel pretium lectus quam.  Morbi non arcu risus quis. Scelerisque viverra mauris in aliquam sem fringilla ut morbi.',
       price: 300.00
     },
     {
@@ -52,8 +52,8 @@ module.exports = {
       country: 'USA',
       lat: 89.633,
       lng: -173.47,
-      name: 'Mr. Bean',
-      description: 'Very chill',
+      name: 'Super Cool Home',
+      description: 'Adipiscing diam donec adipiscing tristique risus nec feugiat in. Nibh venenatis cras sed felis eget velit aliquet sagittis id. Diam in arcu cursus euismod quis. Bibendum arcu vitae elementum curabitur vitae nunc sed. Cras tincidunt lobortis feugiat vivamus. Quis hendrerit dolor magna eget. Id nibh tortor id aliquet lectus. Euismod quis viverra nibh cras. Eu facilisis sed odio morbi quis.',
       price: 249.99
     },
     {
@@ -64,8 +64,8 @@ module.exports = {
       country: 'USA',
       lat: 10.633,
       lng: -133.47,
-      name: 'Mr. Snoopy',
-      description: 'Cool Beans',
+      name: 'Good Looking Mansion',
+      description: 'Fermentum leo vel orci porta non pulvinar neque laoreet. Nascetur ridiculus mus mauris vitae ultricies leo integer. Quam vulputate dignissim suspendisse in est ante in. Feugiat nisl pretium fusce id velit ut. Ante in nibh mauris cursus. In hac habitasse platea dictumst vestibulum rhoncus est. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Varius sit amet mattis vulputate. Maecenas sed enim ut sem viverra aliquet eget sit amet. At in tellus integer feugiat scelerisque varius morbi.',
       price: 244.99
     },
     {
@@ -76,8 +76,8 @@ module.exports = {
       country: 'USA',
       lat: 10.6312343,
       lng: -23.4732,
-      name: 'Halloween Town',
-      description: 'Spooky',
+      name: 'Modern Looking Home',
+      description: 'Magna etiam tempor orci eu lobortis. Augue neque gravida in fermentum et sollicitudin ac orci. Massa massa ultricies mi quis hendrerit. Sed enim ut sem viverra aliquet eget sit amet. Consequat semper viverra nam libero justo laoreet. Euismod elementum nisi quis eleifend quam adipiscing vitae. Amet consectetur adipiscing elit duis tristique sollicitudin nibh. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Elementum curabitur vitae nunc sed velit dignissim.',
       price: 666.66
     },
     {
@@ -89,7 +89,7 @@ module.exports = {
       lat: 103.6312343,
       lng: -13.4732,
       name: 'Sunny Home',
-      description: 'Sunny',
+      description: 'Mi bibendum neque egestas congue quisque egestas diam in arcu. Volutpat consequat mauris nunc congue. Purus faucibus ornare suspendisse sed nisi. Vulputate dignissim suspendisse in est. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Morbi tincidunt ornare massa eget egestas purus viverra accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At consectetur lorem donec massa.',
       price: 1000
     },
     {
@@ -101,7 +101,7 @@ module.exports = {
       lat: 103.12343,
       lng: -53.45732,
       name: 'Cheap Home',
-      description: 'Stinks',
+      description: 'Massa sed elementum tempus egestas sed. Ullamcorper eget nulla facilisi etiam. Luctus accumsan tortor posuere ac ut consequat semper viverra nam. Massa id neque aliquam vestibulum morbi. Scelerisque felis imperdiet proin fermentum leo vel orci porta. Pharetra vel turpis nunc eget lorem. Vulputate enim nulla aliquet porttitor lacus. Porttitor eget dolor morbi non. Neque laoreet suspendisse interdum consectetur libero.',
       price: 10
     },
     {
@@ -112,8 +112,8 @@ module.exports = {
       country: 'USA',
       lat: 17.633,
       lng: -13.42,
-      name: 'Willy Wonka',
-      description: 'Yummy',
+      name: 'Standard Home',
+      description: 'Quis vel eros donec ac odio tempor. Sed felis eget velit aliquet sagittis id consectetur purus. Ultrices vitae auctor eu augue ut. Condimentum lacinia quis vel eros donec ac. Quis risus sed vulputate odio. Sit amet luctus venenatis lectus magna fringilla. Leo duis ut diam quam nulla porttitor massa id neque. Justo eget magna fermentum iaculis eu non. Porttitor leo a diam sollicitudin tempor.',
       price: 777
     },
     {
@@ -124,8 +124,8 @@ module.exports = {
       country: 'USA',
       lat: 10.6343,
       lng: -103.732,
-      name: 'DisneyLand',
-      description: 'Fun',
+      name: 'Cute Vintage Home',
+      description: 'Turpis egestas integer eget aliquet. Fringilla est ullamcorper eget nulla facilisi. Augue ut lectus arcu bibendum. Et egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Sed libero enim sed faucibus. Laoreet non curabitur gravida arcu ac tortor dignissim. Pharetra massa massa ultricies mi. Vivamus arcu felis bibendum ut tristique et. Cras ornare arcu dui vivamus arcu felis.',
       price: 9999
     },
     {
@@ -137,7 +137,7 @@ module.exports = {
       lat: 100.6343,
       lng: -109.7532,
       name: 'Texas Roadhouse',
-      description: 'Yeehaw',
+      description: 'Yeehaw. Aenean sed adipiscing diam donec adipiscing tristique risus. Ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Aenean sed adipiscing diam donec adipiscing tristique risus. Imperdiet sed euismod nisi porta. Cras tincidunt lobortis feugiat vivamus at augue eget. Dui ut ornare lectus sit amet est placerat. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.',
       price: 12
     }
    ], {validate: true})

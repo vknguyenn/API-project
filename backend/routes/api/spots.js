@@ -100,8 +100,8 @@ router.get('/:spotId', requireAuth, async(req, res, next) => {
                 where:{spotId: spot.id}
             })
             
-            const sumReview = await Review.count({
-                where: {spotId: spot.id}
+            const sumReview = await Review.sum('stars',{
+                where: {spotId}
             })
         
             const avgRating = sumReview / numReviews;
