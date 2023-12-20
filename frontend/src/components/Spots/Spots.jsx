@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSpots } from "../../store/spots";
+import { Link } from 'react-router-dom';
 import './Spots.css'
 
 
@@ -20,8 +21,10 @@ const AllSpots = () => {
     <div>
         <div id='spotsContainer'>
             {spots.map(spot => (
-            <div className='spotCard' key={spot.id}>
+            <Link to={`/spots/${spot.id}`} className='spotCard' key={spot.id}>
+
                 <div className='spots' key={spot.id}>
+                
                     <img className="picture" src={spot.previewImage} />
                      <div className="location">
                         <span>{spot.city}, {spot.state}</span>
@@ -36,9 +39,10 @@ const AllSpots = () => {
                     <div className="price">
                         {`$${spot.price} night`}
                     </div>
+                         
 
                 </div>
-            </div>
+            </Link>
             ))}
         </div>
     </div>
