@@ -11,7 +11,7 @@ const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots[spotId])
-    console.log("SPOT: ", spot)
+    // console.log("SPOT: ", spot)
 
 
     useEffect(() => {
@@ -59,7 +59,12 @@ const SpotDetails = () => {
                 }}>Reserve</button>
                 </div>
                 </div>
+                <div className="spot-reviews">
+                <span>⭐{spot.avgRating}</span>
+                <span> · </span>
+                <span>{spot.numReviews} reviews</span>
                 <SpotReviews />
+                </div>
         </div>
     )
 
