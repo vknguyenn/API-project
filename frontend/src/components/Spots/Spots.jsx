@@ -30,10 +30,10 @@ const AllSpots = () => {
                         <span>{spot.city}, {spot.state}</span>
                      </div>
                      <div className="rating">
-                     {spot.avgRating ? (
+                     {spot.avgRating > 0 ? (
                          <span>{`⭐${spot.avgRating}`}</span>
                          ) : (
-                             <span>New</span>
+                             <span>⭐New</span>
                              )}
                     </div>
                     <div className="price">

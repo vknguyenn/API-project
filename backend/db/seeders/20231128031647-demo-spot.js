@@ -139,6 +139,18 @@ module.exports = {
       name: 'Texas Roadhouse',
       description: 'Yeehaw. Aenean sed adipiscing diam donec adipiscing tristique risus. Ipsum dolor sit amet consectetur adipiscing elit.',
       price: 12
+    },
+    {
+      ownerId: 1,
+      address: '123 Eyes On Me',
+      city: 'Baltimore',
+      state: 'Maryland',
+      country: 'USA',
+      lat: 33.333,
+      lng: -123.54,
+      name: 'Demo House',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+      price: 259.99
     }
    ], {validate: true})
   },

@@ -61,6 +61,10 @@ module.exports = {
         spotId: 10,
         url: 'https://images.unsplash.com/photo-1598228723793-52759bba239c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdXNlfGVufDB8fDB8fHww',
         preview: true
+      },{
+        spotId: 11,
+        url: 'https://images.unsplash.com/photo-1564703048291-bcf7f001d83d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHww',
+        preview: true
       }
     ], {validate: true})
   },
