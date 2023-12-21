@@ -1,0 +1,18 @@
+.spotItem {
+    width: fit-content;
+}
+
+.rating-card {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.spotsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#page-container {
+    margin: 40px;
+}

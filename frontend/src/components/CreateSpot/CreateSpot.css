@@ -1,0 +1,58 @@
+#form-container {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    position: absolute;
+    left: 27%;
+    right: 40%;
+}
+
+.location-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.city-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.state-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.city-state {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-input-city {
+    padding-right: 90px;
+}
+
+.description-input {
+    width: 447px;
+    height: 150px;
+}
+
+.create-input-title {
+    padding-right: 275px;
+}
+
+#images-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-input-img {
+    margin: 10px 0px;
+}
+
+.create-button {
+    display: flex;
+    margin-left: 175px;
+}
