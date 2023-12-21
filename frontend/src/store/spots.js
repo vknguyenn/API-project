@@ -75,7 +75,7 @@ export const postSpot = (spot) => async (dispatch) => {
         })
         if (res.ok) {
             const data = await res.json()
-            // dispatch(createSpot(data))
+            dispatch(createSpot(data))
             return data
         }
         } catch (error){
