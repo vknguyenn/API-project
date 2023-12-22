@@ -93,9 +93,10 @@ router.get('/current', requireAuth, async(req, res, next)=> {
 
 router.get('/:spotId', async(req, res, next) => {
     const { spotId } = req.params;
+    console.log("Requested spotId:", spotId);
     let spot = await Spot.findByPk(spotId);
     if (spot) {
-        
+
             const numReviews = await Review.count({
                 where:{spotId: spot.id}
             })
@@ -115,10 +116,11 @@ router.get('/:spotId', async(req, res, next) => {
                 },
                 attributes: ['id', 'url', 'preview']
             })
+            console.log("SPOT IMAGE HERE: ", spot.SpotImages)
             spot.Owner = await User.findByPk(spot.ownerId, {
                 attributes: ['id', 'firstName', 'lastName']
             })
-            
+            console.log("Spot found:", spot);
             return res.json(spot)
     } else {
         return res.status(404).json({
@@ -146,12 +148,12 @@ const validateSpot = [
       .exists({ checkFalsy: true })
       .notEmpty()
       .withMessage('Country is required'),
-    check('lat')
-      .isFloat({min: -90, max: 90})
-      .withMessage('Latitude is not valid'),
-    check('lng')
-      .isFloat({min: -180, max: 180})
-      .withMessage('Longitude is not valid'),
+    // check('lat')
+    //   .isFloat({min: -90, max: 90})
+    //   .withMessage('Latitude is not valid'),
+    // check('lng')
+    //   .isFloat({min: -180, max: 180})
+    //   .withMessage('Longitude is not valid'),
     check('name')
       .exists({ checkFalsy: true })
       .notEmpty()
@@ -271,12 +273,11 @@ router.post('/', authenUser, validateSpot, async (req, res) => {
     res.status(201).json(spotPost)
 })
 
-router.post('/:spotId/images', authenUser, authorUser, async(req, res) =>  {
+router.post('/:spotId/images', authenUser, authorUser, async(req, res, next) =>  {
     const newImage = {};
     const { spotId } = req.params;
     const { url, preview } = req.body;
     const spotImage = await SpotImage.create({spotId, url, preview});
-
     
     newImage.id = spotImage.id;
     newImage.url = url;

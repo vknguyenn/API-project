@@ -2,7 +2,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
+.main-image {
+    height: 400px;
+    border: 1px solid red;
+}
 .other-images {
     display: grid;
     grid: 1fr 1fr / 1fr 1fr;

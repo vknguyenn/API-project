@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postSpot } from "../../store/spots";
-import { useNavigate } from "react-router-dom";
-import './CreateSpot.css'
+import { useNavigate, useParams } from "react-router-dom";
+import { editSpot, fetchSpot } from "../../store/spots";
 
-
-const CreateSpot = () => {
+const UpdateSpot = () => {
     const sessionUser = useSelector(state => state.session.user);
+    const { spotId } = useParams();
+    const spot = useSelector(state => state.spots[spotId]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -16,13 +17,34 @@ const CreateSpot = () => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [name, setName] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    const [img2, setImg2] = useState('')
-    const [img3, setImg3] = useState('')
-    const [img4, setImg4] = useState('')
-    const [img5, setImg5] = useState('')
+    // const [previewImage, setPreviewImage] = useState('')
+    // const [img2, setImg2] = useState('')
+    // const [img3, setImg3] = useState('')
+    // const [img4, setImg4] = useState('')
+    // const [img5, setImg5] = useState('')
     const [errors, setErrors] = useState({})
-    
+
+    useEffect(() => {
+        dispatch(fetchSpot(spotId));
+    }, [dispatch, spotId])
+
+    useEffect(() => {
+        if (spot) {
+            
+            setCountry(spot?.country || '');
+            setAddress(spot?.address || '');
+            setCity(spot?.city || '');
+            setState(spot?.state);
+            setDescription(spot?.description || '');
+            setName(spot?.name || '')
+            setPrice(spot?.price || '');
+            // setPreviewImage(spot?.previewImage || '')
+          
+
+        }
+    }, [spot])
+
+    if(!spot) return null;
 
     const addressInput = e => setAddress(e.target.value);
     const cityInput = e => setCity(e.target.value);
@@ -31,17 +53,15 @@ const CreateSpot = () => {
     const descriptionInput = e => setDescription(e.target.value);
     const nameInput = e => setName(e.target.value);
     const priceInput = e => setPrice(e.target.value);
-    const previewImageInput = e => {
-        setPreviewImage(e.target.value);
-        console.log("PREVIEW IMAGE: ", e.target.value)
-    }
-    const img2Input = e => setImg2(e.target.value);
-    const img3Input = e => setImg3(e.target.value);
-    const img4Input = e => setImg4(e.target.value);
-    const img5Input = e => setImg5(e.target.value);
+    // const previewImageInput = e => {
+    //     setPreviewImage(e.target.value);
+    //     console.log("PREVIEW IMAGE: ", e.target.value)
+    // }
+    // const img2Input = e => setImg2(e.target.value);
+    // const img3Input = e => setImg3(e.target.value);
+    // const img4Input = e => setImg4(e.target.value);
+    // const img5Input = e => setImg5(e.target.value);
 
-
-    
     function validationInputs() {
         let errs = {};
         if(!address) errs.address = "Address is required"
@@ -51,18 +71,18 @@ const CreateSpot = () => {
         if(description.length < 30) errs.description = "Description needs a minimum of 30 characters"
         if(!name) errs.name = "Name is required"
         if(!price) errs.price = "Price is required"
-        if(!previewImage) errs.previewImage = "Preview image is required"
+        // if(!previewImage) errs.previewImage = "Preview image is required"
 
         setErrors(errs)
         console.log("Validation errors:", errs);
         return errs
     }
 
+
     const submitForm = async (e) => {  
         e.preventDefault();
-
     
-        const createdSpot = {
+        const editedSpot = {
             ownerId: sessionUser.id,
             address,
             city,
@@ -70,38 +90,34 @@ const CreateSpot = () => {
             country, 
             name, 
             description,
-            price
+            price            
         };
 
-        const createdImages = [{ url: previewImage, preview: true }];
+        // const createdImages = [{ url: previewImage, preview: true }];
 
-        if (img2) createdImages.push({ url: img2, preview: false });
-        if (img3) createdImages.push({ url: img3, preview: false });
-        if (img4) createdImages.push({ url: img4, preview: false });
-        if (img5) createdImages.push({ url: img5, preview: false });
+        // if (img2) createdImages.push({ url: img2, preview: false });
+        // if (img3) createdImages.push({ url: img3, preview: false });
+        // if (img4) createdImages.push({ url: img4, preview: false });
+        // if (img5) createdImages.push({ url: img5, preview: false });
     
         const formErrors = validationInputs();
         if (Object.keys(formErrors).length === 0) {
-            console.log("Image Array:", createdImages);
-            const newSpot = await dispatch(postSpot(createdSpot, createdImages));
-
-            if (newSpot) {
+            // console.log("Image Array:", createdImages);
+            const newSpot = await dispatch(editSpot(editedSpot, spotId));
+            console.log("NEW SPOT: ", newSpot)
+            if (newSpot && newSpot.id) {
                 
                 navigate(`/spots/${newSpot.id}`);
             } else if (newSpot.errors) {
                 setErrors(newSpot.errors);
             }
-            
         }
-        
-        // console.log("Image Array after dispatch:", createdImages);
-        // console.log("NEW SPOT: ", newSpot)
+       
     }
-
     return (
         <>
             <div id='form-container'>
-            <h1>Create a New Spot</h1>
+            <h1>Edit Spot</h1>
             <h2>Where&apos;s your place located?</h2>
             <p>Guests will only get to your exact address once they booked a reservation.</p>
             <div id='create-form'>
@@ -154,7 +170,7 @@ const CreateSpot = () => {
                     <input className="create-input" placeholder="Price per night (USD)" value={price} onChange={priceInput} />
                     {errors.price && <p style={{color:"red"}} className="err">{errors.price}</p>}
                 </div>
-                <div id='images-container'>
+                {/* <div id='images-container'>
                     <h2>Liven up your spot with photos</h2>
                     <p>Submit a link to at least one photo to publish your spot</p>
                     <input className="create-input-img" placeholder="Preview Image URL" id='preview-img' value={previewImage} onChange={previewImageInput} type='URL' />
@@ -163,9 +179,9 @@ const CreateSpot = () => {
                     <input className="create-input-img" placeholder="Image URL" value={img3} onChange={img3Input} type="URL"/>
                     <input className="create-input-img" placeholder="Image URL" value={img4} onChange={img4Input} type="URL"/>
                     <input className="create-input-img" placeholder="Image URL" value={img5} onChange={img5Input} type="URL"/>
-                </div>
+                </div> */}
                 <div>
-                    <button className="create-button"type="submit">Create Spot</button>
+                    <button className="create-button"type="submit">Edit Spot</button>
                 </div>
             </form>
             </div>
@@ -174,6 +190,6 @@ const CreateSpot = () => {
     )
 
 
-}
 
-export default CreateSpot
+}
+export default UpdateSpot
