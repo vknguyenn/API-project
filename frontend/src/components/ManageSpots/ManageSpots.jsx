@@ -4,6 +4,7 @@ import { fetchAllSpots } from "../../store/spots";
 import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteSpot from "../DeleteSpot/DeleteSpot";
+import UpdateButtons from "./UpdateButton";
 import './ManageSpots.css'
 
 const ManageSpots = () => {
@@ -11,13 +12,16 @@ const ManageSpots = () => {
     const spotsObj = useSelector(state => state.spots)
     const spots = Object.values(spotsObj)
     const sessionUser = useSelector(state => state.session.user)
-   
     let currentSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
-
+    
     console.log(currentSpots)
     useEffect(() => {
         dispatch(fetchAllSpots())
     }, [dispatch])
+    
+    
+    
+    
 
     return(
         <div id='page-container'>
@@ -46,7 +50,7 @@ const ManageSpots = () => {
                                 </div>
                             </Link>
                             <div className="manage-buttons">
-                            <button>Update</button>
+                            <UpdateButtons spotId={spot.id}/>
                             <OpenModalButton
                             buttonText='Delete'
                             modalComponent={<DeleteSpot spot={spot}/>}

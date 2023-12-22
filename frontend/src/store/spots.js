@@ -4,6 +4,7 @@ const LOAD_SPOTS = 'spots/getSpots';
 const LOAD_SPOT = 'spots/getSpot';
 const DELETE_SPOT = 'spots/deleteSpot'
 const CREATE_SPOT = 'spots/createSpot'
+const UPDATE_SPOT = 'spots/updateSpot'
 
 const loadSpots = (spots) => {
     return {
@@ -32,6 +33,15 @@ const createSpot = (spot) => {
         spot
     }
 }
+
+
+const updateSpot = (spot) => {
+    return {
+        type: UPDATE_SPOT,
+        spot
+    }
+}
+
 
 export const fetchAllSpots = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots')
@@ -64,26 +74,56 @@ export const destroySpot = spot => async (dispatch) => {
     }
 }
 
-export const postSpot = (spot) => async (dispatch) => {
-    try {
-        const res = await csrfFetch('/api/spots', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(spot)
-        })
-        if (res.ok) {
-            const data = await res.json()
-            dispatch(createSpot(data))
+export const postSpot = (spot, imgArr) => async (dispatch) => {
+    const res = await csrfFetch('/api/spots', {
+        method: 'POST',
+        headers: { "Content-Type": 'application/json'},
+        body: JSON.stringify(spot)
+    })
+
+    if (res.ok) {
+        const spot = await res.json()
+        console.log('IN SPOT RESPONSE', imgArr, spot)
+
+        if (spot) {
+            for (let img of imgArr) {
+            if (img) {
+                const newImg = await csrfFetch(`/api/spots/${spot.id}/images`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({spotId: spot.id, url: img.url, preview: true})
+                    
+                })
+                console.log("IMAGE: ", newImg)
+            }
+            }
+                dispatch(createSpot(spot))
+            
+            return spot
+        }
+
+    }
+    }
+
+export const editSpot = (spotInfo, spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(spotInfo)
+    })
+    if(res.ok) {
+        const data = await res.json();
+            console.log("DATA: ", data)
+            dispatch(updateSpot(data))
             return data
         }
-        } catch (error){
-            const errors = await error.json()
-            console.log("ERRORS:", errors)
-            return errors
-        }
-    }
+}
+
+
 
 const initialState = {}
 
@@ -107,7 +147,12 @@ const spotsReducer = (state = initialState, action) => {
             return newState
         }
         case CREATE_SPOT: {
-            return { ...state, [action.spot.id]: action.spot }
+            const newState = { ...state, [action.spot.id]: action.spot };
+            return newState;
+        }
+        case UPDATE_SPOT: {
+            const newState = { ...state, [action.spot.id]: action.spot };
+            return newState;
         }
 
         default:

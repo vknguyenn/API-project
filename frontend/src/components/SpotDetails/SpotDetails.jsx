@@ -7,6 +7,7 @@ import './SpotDetails.css'
 
 
 
+
 const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -21,7 +22,10 @@ const SpotDetails = () => {
     if (!spot || !spot.Owner) {
         return <div>Loading...</div>;
     }
-    console.log("avgRating:", spot.avgRating)
+
+    if (!spot.SpotImages) return null;
+
+    console.log("spotImages: ", spot.SpotImages)
 
     return (
         <div className="details-container">
@@ -31,13 +35,14 @@ const SpotDetails = () => {
             </div>
             <div id='image-container'>
             <div className="main-image">
-                <img className="main-pic" src={spot.SpotImages[0].url} alt='main-pic' />
+                <img className="main-pic" src={spot.SpotImages[0]?.url} alt='main-pic' />
             </div>
+             
             <div className="other-images">
-                <img className="img2" src={spot.SpotImages} alt='img2' />
-                <img className="img3" src={spot.SpotImages} alt='img3' />
-                <img className="img4" src={spot.SpotImages} alt='img4' />
-                <img className="img5" src={spot.SpotImages} alt='img5' />
+                <div className="other-img"><img src={spot.SpotImages?.[1]?.url} /> </div>
+                <div className="other-img"><img src={spot.SpotImages?.[2]?.url} /></div>
+                <div className="other-img"><img src={spot.SpotImages?.[3]?.url} /></div>
+                <div className="other-img"><img src={spot.SpotImages?.[4]?.url} /></div>
             </div>
             </div>
             <div className="middle-container">

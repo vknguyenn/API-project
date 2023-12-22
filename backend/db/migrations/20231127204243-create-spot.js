@@ -41,12 +41,12 @@ module.exports = {
       },
       lat: {
         type: Sequelize.DECIMAL,
-        allowNull: false,
+        allowNull: true,
         unique: true
       },
       lng: {
         type: Sequelize.DECIMAL,
-        allowNull: false,
+        allowNull: true,
         unique: true
       },
       name: {
