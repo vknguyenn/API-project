@@ -11,13 +11,19 @@
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    justify-content: space-between;
 }
 
 .picture {
-    height: 200px;
-    width: 200px;
+    /* height: 300px;
+    width: 300px; */
     border-radius: 10px;
+    width: 100%;
+    height: 25em;
+   
+}
+
+.spots{
+    margin: 25px;
 }
 
 .rating {
@@ -31,7 +37,22 @@ a:link {
     color: black;
 }
 
-a:visited {
-    text-decoration: none;
+.location > span {
+    color: black
+}
+
+.price {
     color: black;
+}
+
+.tooltip-name {
+    visibility: hidden;
+    background-color: beige;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.tooltip:hover .tooltip-name {
+    visibility: visible;
 }

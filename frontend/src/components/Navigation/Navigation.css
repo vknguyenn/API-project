@@ -11,15 +11,61 @@
 
 li {
     list-style-type: none;
+    cursor: pointer;
 }
 
 #profile {
     border: 1px solid black;
     padding: 5px 15px;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 #profileIcon {
     padding-left: 5px;
 }
 
+.create-spot-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#logo {
+    height: 50px;
+    width: 50px;
+}
+
+.navLink {
+    
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(223, 66, 92)
+}
+
+
+#logo-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    cursor: pointer;
+}
+
+
+
+.user-menu {
+    /* display: flex;
+    align-items: center; */
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+.profile-dropdown {
+    background-color: aliceblue;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}

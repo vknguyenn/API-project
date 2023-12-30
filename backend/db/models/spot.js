@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
         max: 49
       }
     },
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     price: DataTypes.DECIMAL
   }, {
     sequelize,
