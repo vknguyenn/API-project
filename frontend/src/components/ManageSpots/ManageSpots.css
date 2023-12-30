@@ -2,6 +2,7 @@
     width: fit-content;
 }
 
+
 .rating-card {
     display: flex;
     justify-content: flex-end;
@@ -16,3 +17,29 @@
 #page-container {
     margin: 40px;
 }
+
+.manage-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 24px;
+}
+
+.manage-heading {
+    margin-left: 20px;
+}
+
+#create-spot-button {
+    background-color: gray;
+    color: white;
+}
+
+.update-button {
+    background-color: gray;
+    color: white;
+}
+
+.delete-button {
+    background-color: gray;
+    color: white;
+}
+

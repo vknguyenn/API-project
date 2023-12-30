@@ -5,8 +5,7 @@
 }
 .main-image {
     max-height: 500px;
-    /* width: 700px; */
-    border: 1px solid red;
+    
 }
 .main-pic {
     width: 100%;
@@ -14,10 +13,10 @@
 }
 .other-images {
     display: grid;
-    grid: 1fr 1fr / 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr); 
     height: 500px;
     width: 100%;
-    border: 1px green solid;
     overflow: hidden;
     
 }
@@ -25,7 +24,8 @@
 .other-images img{
     height: 100%;
     width: 100%;
-    /* box-sizing: border-box; */
+    object-fit: fill;
+    object-position: center;
 }
 
 
@@ -70,3 +70,33 @@
     padding: 10px 50px;
 }
 
+.aspect-ratio-box {
+    width: 100%;
+    height: 0;
+    padding-top: 50%; /* Adjust this value for the aspect ratio */
+    position: relative;
+}
+
+
+@media (max-width: 600px) {
+    .other-images {
+        grid-template-columns: 1fr; /* One column */
+        grid-template-rows: repeat(4, 1fr); /* Four rows */
+    }
+}
+
+/* Additional media query for medium screens */
+@media (min-width: 601px) and (max-width: 900px) {
+    .other-images {
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-template-rows: repeat(2, 1fr); /* Two rows */
+    }
+}
+
+@media (min-width: 1501px) {
+    .other-images {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Two columns, flexible sizing */
+        grid-template-rows: repeat(2, 250px); /* Two rows with fixed height */
+        /* Adjust the height as needed to maintain aspect ratio */
+    }
+}

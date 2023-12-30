@@ -26,8 +26,10 @@ const ManageSpots = () => {
 
     return(
         <div id='page-container'>
+            <div className="manage-heading">
             <h1>Manage Spots</h1>
             <button id='create-spot-button' onClick={() => navigate('/spots/new')}>Create a New Spot</button>
+            </div>
             <div className="user-spots">
                 <div className="spotsContainer">
                     {currentSpots.map(spot => (
@@ -54,6 +56,7 @@ const ManageSpots = () => {
                             <UpdateButtons spotId={spot.id}/>
                             <OpenModalButton
                             buttonText='Delete'
+                            className='delete-button'
                             modalComponent={<DeleteSpot spot={spot}/>}
                             />
                             </div>
