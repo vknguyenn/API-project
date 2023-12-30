@@ -44,6 +44,7 @@ const CreateSpot = () => {
     
     function validationInputs() {
         let errs = {};
+    
         if(!address) errs.address = "Address is required"
         if(!city) errs.city = "City is required"
         if(!state) errs.state = "State is required"
@@ -53,8 +54,9 @@ const CreateSpot = () => {
         if(!price) errs.price = "Price is required"
         if(!previewImage) errs.previewImage = "Preview image is required"
 
+
         setErrors(errs)
-        console.log("Validation errors:", errs);
+        // console.log("Validation errors:", errs);
         return errs
     }
 
@@ -99,7 +101,7 @@ const CreateSpot = () => {
     }
 
     return (
-        <>
+        <div id='create-page'>
             <div id='form-container'>
             <h1>Create a New Spot</h1>
             <h2>Where&apos;s your place located?</h2>
@@ -138,7 +140,7 @@ const CreateSpot = () => {
                 <div className="description-container">
                     <h2>Describe your place to guests</h2>
                     <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                    <textarea className="description-input" placeholder="Description" type='text' value={description} onChange={descriptionInput} />
+                    <textarea className="description-input" placeholder="Please write at least 30 characters" type='text' value={description} onChange={descriptionInput} />
                     {errors.description && <p style={{color:"red"}} className="err">{errors.description}</p>}              
                 </div>
                 <div className="title-container">
@@ -164,13 +166,13 @@ const CreateSpot = () => {
                     <input className="create-input-img" placeholder="Image URL" value={img4} onChange={img4Input} type="URL"/>
                     <input className="create-input-img" placeholder="Image URL" value={img5} onChange={img5Input} type="URL"/>
                 </div>
-                <div>
+                <div className="create-button-container">
                     <button className="create-button"type="submit">Create Spot</button>
                 </div>
             </form>
             </div>
             </div>
-        </>
+        </div>
     )
 
 

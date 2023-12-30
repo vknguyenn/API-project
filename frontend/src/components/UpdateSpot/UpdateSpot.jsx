@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { editSpot, fetchSpot } from "../../store/spots";
+import '../CreateSpot/CreateSpot.css'
 
 const UpdateSpot = () => {
     const sessionUser = useSelector(state => state.session.user);
@@ -117,7 +118,7 @@ const UpdateSpot = () => {
     return (
         <>
             <div id='form-container'>
-            <h1>Edit Spot</h1>
+            <h1>Update Your Spot</h1>
             <h2>Where&apos;s your place located?</h2>
             <p>Guests will only get to your exact address once they booked a reservation.</p>
             <div id='create-form'>
@@ -170,18 +171,8 @@ const UpdateSpot = () => {
                     <input className="create-input" placeholder="Price per night (USD)" value={price} onChange={priceInput} />
                     {errors.price && <p style={{color:"red"}} className="err">{errors.price}</p>}
                 </div>
-                {/* <div id='images-container'>
-                    <h2>Liven up your spot with photos</h2>
-                    <p>Submit a link to at least one photo to publish your spot</p>
-                    <input className="create-input-img" placeholder="Preview Image URL" id='preview-img' value={previewImage} onChange={previewImageInput} type='URL' />
-                    {errors.previewImage && <p style={{color:"red"}} className="err">{errors.previewImage}</p>}
-                    <input className="create-input-img" placeholder="Image URL" value={img2} onChange={img2Input} type="URL"/>
-                    <input className="create-input-img" placeholder="Image URL" value={img3} onChange={img3Input} type="URL"/>
-                    <input className="create-input-img" placeholder="Image URL" value={img4} onChange={img4Input} type="URL"/>
-                    <input className="create-input-img" placeholder="Image URL" value={img5} onChange={img5Input} type="URL"/>
-                </div> */}
-                <div>
-                    <button className="create-button"type="submit">Edit Spot</button>
+                <div className="create-button-container">
+                    <button className="create-button"type="submit">Create Spot</button>
                 </div>
             </form>
             </div>

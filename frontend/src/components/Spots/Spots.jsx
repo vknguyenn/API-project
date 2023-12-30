@@ -21,6 +21,7 @@ const AllSpots = () => {
     <div>
         <div id='spotsContainer'>
             {spots.map(spot => (
+            <div className="tooltip" key={spot.id}>
             <Link to={`/spots/${spot.id}`} className='spotCard' key={spot.id}>
 
                 <div className='spots' key={spot.id}>
@@ -29,12 +30,11 @@ const AllSpots = () => {
                      <div className="location">
                         <span>{spot.city}, {spot.state}</span>
                      </div>
+                     <span className="tooltip-name">{spot.name}</span>
                      <div className="rating">
-                     {spot.avgRating > 0 ? (
-                         <span>{`⭐${spot.avgRating}`}</span>
-                         ) : (
-                             <span>⭐New</span>
-                             )}
+                     {spot.avgRating > 0 ? 
+                     (<span>⭐{parseFloat(spot.avgRating).toFixed(1)}</span>) : 
+                     (<span>⭐New</span>)}
                     </div>
                     <div className="price">
                         {`$${spot.price} night`}
@@ -43,6 +43,7 @@ const AllSpots = () => {
 
                 </div>
             </Link>
+            </div>
             ))}
         </div>
     </div>

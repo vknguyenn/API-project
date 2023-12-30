@@ -1,0 +1,30 @@
+#signup-container{
+    height: 400px;
+    width: 400px;
+}
+
+#signup-header {
+    display: flex;
+    justify-content: center;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-inputs {
+    padding-right: 200px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 2px solid black;
+    background-color: aliceblue;
+    box-sizing: border-box;
+}
+
+.signup-button {
+    padding: 15px 165px;
+    background-color: rgb(243, 107, 107);
+    color: white;
+}

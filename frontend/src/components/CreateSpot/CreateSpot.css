@@ -1,10 +1,15 @@
+/* #create-page {
+    display: flex;
+    justify-content: center;
+   
+}
+
+
 #form-container {
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 30%;
     position: absolute;
-    left: 27%;
-    right: 40%;
 }
 
 .location-container {
@@ -55,4 +60,78 @@
 .create-button {
     display: flex;
     margin-left: 175px;
+} */
+
+
+#create-page {
+    display: flex;
+    justify-content: center;
+}
+
+#form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto; 
+    padding: 20px;
+}
+
+.location-container,
+.city-container,
+.state-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.city-state {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-input-city {
+    flex-grow: 1;
+    padding-right: 90px;
+    background-color: aliceblue;
+}
+
+.create-input-title {
+    flex-grow: 1;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.description-input {
+    width: 100%; 
+    max-width: 100%;
+    height: 150px;
+    background-color: aliceblue;
+}
+
+#images-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-input-img {
+    margin: 10px 0;
+    background-color: aliceblue;
+}
+
+.create-button-container {
+    display: flex;
+    justify-content: center; 
+    margin: 10px 0;
+}
+
+.create-button {
+    background-color: rgb(243, 107, 107);
+    color: white;
+    padding: 4px 10px;
+}
+
+.create-input {
+    background-color: aliceblue;
 }
