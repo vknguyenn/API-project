@@ -15,6 +15,7 @@ const AllSpots = () => {
 
     useEffect(() => {
         dispatch(fetchAllSpots())
+        console.log("I am here")
     }, [dispatch])
 
    return(
