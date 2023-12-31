@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
@@ -16,8 +16,9 @@ const SpotDetails = () => {
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots[spotId])
     const sessionUser = useSelector(state => state.session.user)
-    const reviews = useSelector(state => state.reviews[spotId])
+    const reviews = useSelector(state => state.reviews)
     
+    const [hasReviewed, setHasReviewed] = useState(false);
     
     // console.log("SPOT: ", spot)
     console.log("REVIEW IN SPOT DETAILS: ", reviews)
@@ -26,8 +27,26 @@ const SpotDetails = () => {
         dispatch(fetchSpot(spotId));
         dispatch(fetchAllReviews(spotId))
         
+    
+        
     }, [dispatch, spotId])
 
+    useEffect(() => {
+    //         reviews.map((review) => {
+    //         if (sessionUser.id === review.User.id) {
+    //             setHasReviewed(true)
+    //         }
+    // })
+    if (reviews && sessionUser) {
+        const searchIfReviewed = Object.values(reviews).some(review => review.userId === sessionUser.id);
+        console.log(searchIfReviewed)
+        setHasReviewed(searchIfReviewed)
+    }
+        console.log("Reviews: ", reviews)
+        
+    }, [reviews, sessionUser])
+
+   
   
 
     if (!spot || !spot.Owner) {
@@ -80,7 +99,7 @@ const SpotDetails = () => {
                 <span className="review-info">{spot.numReviews === 1 ? '· 1 Review' : (spot.numReviews > 1 ? `· ${spot.numReviews} Reviews` : '')}</span>
                 {
                     sessionUser && 
-                    sessionUser?.id !== spot.Owner.id &&
+                    sessionUser?.id !== spot.Owner.id && !hasReviewed &&
                     <OpenModalButton buttonText="Post Your Review" modalComponent={<ReviewForm spot={spot}/>} />
                 }
                 {sessionUser?.id !== spot.Owner.id && spot.numReviews === 0 ?  "Be the first to post a review!" : null}
