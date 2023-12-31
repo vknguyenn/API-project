@@ -35,9 +35,10 @@ const ReviewForm = ({spot}) => {
                 } else if (data?.message) {
                     setErrMessage(data)
                 }
-            
         }
     };
+
+
 
 
     return (
