@@ -72,7 +72,7 @@ export const removeReview = review => async dispatch => {
     }
 }
 
-const initialState = {spot:{}, user: {}};
+const initialState = {};
 
 const reviewsReducer = (state = initialState, action) => {
     switch(action.type) {
