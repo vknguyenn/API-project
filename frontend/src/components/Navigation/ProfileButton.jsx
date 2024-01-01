@@ -54,14 +54,14 @@ function ProfileButton({ user }) {
        </button>
         <ul className={ulClassName} ref={ulRef}>
           {user ? (
-            <>
+            <div className='dropdown-container'>
               <div>Hello, {user.username}</div>
               <li>{user.email}</li>
               <NavLink to="/spots/current" id='manage-page' onClick={closeMenu}>Manage Spots</NavLink>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <button className='logout-dropdown'onClick={logout}>Log Out</button>
               </li>
-            </>
+            </div>
           ) : (
             <>
               <OpenModalMenuItem
