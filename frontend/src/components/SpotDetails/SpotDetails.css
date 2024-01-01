@@ -2,10 +2,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     max-height: 500px;
+    
 }
 .main-image {
     max-height: 500px;
-    
 }
 .main-pic {
     width: 100%;
@@ -40,7 +40,9 @@
 .spot-info {
     display: flex;
     flex-direction: column;
+    width: 60%;
 }
+
 
 .reserve-container {
     border: 1px solid black;
@@ -88,21 +90,30 @@
 }
 
 
-
-@media (max-width: 600px) {
-    .other-images {
-        grid-template-columns: 1fr; 
-        grid-template-rows: repeat(4, 1fr); 
+@media screen and (max-width: 1024px) {
+    #image-container {
+        max-height: 400px; /* Adjust the max-height as needed */
     }
-}
+    .main-image {
+        max-height: 400px;
+    }
+    .other-images img {
+        max-height: 100%; /* Ensure the image does not exceed the height of its container */
+        max-width: 100%; /* Ensure the image does not exceed the width of its container */
+        object-position: center;
+    }
 
-
-@media (min-width: 601px) and (max-width: 900px) {
     .other-images {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr); 
+        height: 400px;
+        width: 100%;
+        overflow: hidden;
+        
     }
 }
+
 
 @media (min-width: 1501px) {
     .other-images {

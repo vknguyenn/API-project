@@ -78,14 +78,13 @@ const SpotDetails = () => {
             <div className="middle-container">
             <div className="spot-info">
             <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2> 
-            <div>{spot.description}</div>
+            <div className="spot-description">{spot.description}</div>
                 </div>
             <div className="reserve-container">
                 <div className="price-rating-numReview">
                     <h2>${spot.price}</h2>
                     <span>night</span> 
                     <span>{spot.numReviews === 0 ? '⭐ New' : `⭐${spot.avgRating.toFixed(1)}`}</span>
-                    {/* <span> · </span> */}
                     <span>{spot.numReviews === 1 ? ' · 1 Review' : (spot.numReviews > 1 ? ` · ${spot.numReviews} Reviews` : '')}</span>
                 </div>
                 <button className="reserve" onClick={() => {
