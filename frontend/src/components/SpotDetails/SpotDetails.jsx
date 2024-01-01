@@ -86,7 +86,7 @@ const SpotDetails = () => {
                     <span>night</span> 
                     <span>{spot.numReviews === 0 ? '⭐ New' : `⭐${spot.avgRating.toFixed(1)}`}</span>
                     {/* <span> · </span> */}
-                    <span>{spot.numReviews === 1 ? '· 1 Review' : (spot.numReviews > 1 ? `· ${spot.numReviews} Reviews` : '')}</span>
+                    <span>{spot.numReviews === 1 ? ' · 1 Review' : (spot.numReviews > 1 ? ` · ${spot.numReviews} Reviews` : '')}</span>
                 </div>
                 <button className="reserve" onClick={() => {
                     throw alert('Feature coming soon')
@@ -94,16 +94,17 @@ const SpotDetails = () => {
                 </div>
                 </div>
                 <div className="spot-reviews">
-                <span className="review-info">{spot.numReviews === 0 ? '⭐ New' : `⭐${spot.avgRating.toFixed(1)}`}</span>
-                {/* <span className="review-info"> · </span> */}
-                <span className="review-info">{spot.numReviews === 1 ? '· 1 Review' : (spot.numReviews > 1 ? `· ${spot.numReviews} Reviews` : '')}</span>
+                <div className="review-stuff">
+                <span className="review-info">{spot.numReviews === 0 ? '⭐ New' : `⭐${spot.avgRating.toFixed(1)}`} {spot.numReviews === 1 ? ' · 1 Review' : (spot.numReviews > 1 ? ` · ${spot.numReviews} Reviews` : '')}</span>
+                {/* <span className="review-info">{spot.numReviews === 1 ? ' · 1 Review' : (spot.numReviews > 1 ? ` · ${spot.numReviews} Reviews` : '')}</span> */}
                 {
                     sessionUser && 
                     sessionUser?.id !== spot.Owner.id && !hasReviewed &&
-                    <OpenModalButton buttonText="Post Your Review" modalComponent={<ReviewForm spot={spot}/>} />
+                    <OpenModalButton className="post-review-button" buttonText="Post Your Review" modalComponent={<ReviewForm spot={spot}/>} />
                 }
                 {sessionUser?.id !== spot.Owner.id && spot.numReviews === 0 ?  "Be the first to post a review!" : null}
                  
+                </div>
                 <SpotReviews />
                 </div>
         </div>

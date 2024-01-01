@@ -26,6 +26,20 @@ function LoginFormModal() {
       });
   };
 
+  const demoUser = (e) => {
+    e.preventDefault();
+    setErrors({});
+    dispatch(sessionActions.login({credential: 'Demo-lition', password: 'password'}))
+    .then(closeModal)
+    .catch(async (response) => {
+      const data = await response.json();
+      if (data && data.errors) {
+        setErrors(data.errors)
+      }
+    })
+
+  }
+
   return (
     <div id='login-container'>
       <h1 className='login-header'>Log In</h1>
@@ -55,6 +69,7 @@ function LoginFormModal() {
         </label>
        
         <button id='login-button' type="submit" disabled={credential.length < 4 || password.length < 6}>Log In</button>
+        <button id='demo-button' onClick={demoUser}>Demo User</button>
       </form>
     </div>
   );
