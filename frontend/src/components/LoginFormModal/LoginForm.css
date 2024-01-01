@@ -42,3 +42,12 @@
     background-color: rgb(243, 107, 107);
     color: white;
 }
+
+#demo-button {
+    border: none;
+    color: teal;
+    background-color: transparent;
+    margin-top: 10px;
+    font-size: large;
+    text-decoration: underline;
+}

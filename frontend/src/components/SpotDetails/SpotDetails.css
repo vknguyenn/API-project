@@ -63,6 +63,16 @@
 .review-info {
     font-size: 20px;
 }
+
+.review-stuff {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-review-button {
+    width: 140px;
+}
+
 .reserve {
     border: 2px solid black;
     background-color: rgb(224, 69, 69);
@@ -73,30 +83,30 @@
 .aspect-ratio-box {
     width: 100%;
     height: 0;
-    padding-top: 50%; /* Adjust this value for the aspect ratio */
+    padding-top: 50%;
     position: relative;
 }
 
 
+
 @media (max-width: 600px) {
     .other-images {
-        grid-template-columns: 1fr; /* One column */
-        grid-template-rows: repeat(4, 1fr); /* Four rows */
+        grid-template-columns: 1fr; 
+        grid-template-rows: repeat(4, 1fr); 
     }
 }
 
-/* Additional media query for medium screens */
+
 @media (min-width: 601px) and (max-width: 900px) {
     .other-images {
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        grid-template-rows: repeat(2, 1fr); /* Two rows */
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1501px) {
     .other-images {
-        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Two columns, flexible sizing */
-        grid-template-rows: repeat(2, 250px); /* Two rows with fixed height */
-        /* Adjust the height as needed to maintain aspect ratio */
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, 250px); 
     }
 }
