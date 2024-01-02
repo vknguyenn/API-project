@@ -41,10 +41,9 @@ const ManageSpots = () => {
                                         <span>{spot.city}, {spot.state}</span>
                                     </div>
                                     <div className="rating-card">
-                                        {spot.avgRating > 0 ? (
-                                            <span>{`⭐${spot.avgRating}`}</span>
-                                        ) : (
-                                            <span>⭐New</span>
+                                        {spot.avgRating > 0 ? 
+                                        (<span className="rate">⭐{parseFloat(spot.avgRating).toFixed(1)}</span>) : (
+                                            <span className="rate">⭐New</span>
                                         )}
                                     </div>
                                     <div className="price">
